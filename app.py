@@ -71,7 +71,7 @@ if st.button("Translate Audio"):
             chunk_transcription_text = transcription.text
             full_transcription += chunk_transcription_text + " "
             # Translate the chunk transcription
-            translation = translator.translate(chunk_transcription_text,src=selected_lang_code_src, dest=selected_lang_code_tar)
+            translation = translator.translate(chunk_transcription_text, dest=selected_lang_code_tar,src=selected_lang_code_src)
             # Append the chunk translation to full translation
             full_translation += translation.text + " "
 
