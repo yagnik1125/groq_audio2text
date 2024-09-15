@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 from groq import Groq
 import streamlit as st
-from googletrans import Translator  # Translator for language translation
+import googletrans 
 from pydub import AudioSegment
 import tempfile
 
@@ -11,7 +11,7 @@ import tempfile
 client = Groq(api_key="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")
 
 # Initialize Google Translate API
-translator = Translator()
+translator = googletrans.Translator()
 
 # Streamlit frontend for audio input and translation
 st.title("Audio Translation App")
