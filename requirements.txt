@@ -1,5 +1,5 @@
 streamlit
 pydub
 groq
-googletrans==3.1.0a0
+googletrans
 python-dotenv
