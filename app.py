@@ -22,7 +22,8 @@ uploaded_file = st.file_uploader("Upload an audio file", type=["mp3", "wav", "og
 
 languages = googletrans.LANGUAGES
 language_options = list(languages.values())
-selected_lang = st.selectbox("Select the target language for translation", language_options)
+selected_lang_src = st.selectbox("Select the source language for audio", language_options)
+selected_lang_tar = st.selectbox("Select the target language for translation", language_options)
 
 # # Text input for target language (e.g., 'hi' for Hindi, 'fr' for French)
 # target_language = st.text_input("Enter target language code (e.g., 'hi' for Hindi)", value="en")
@@ -41,7 +42,8 @@ if st.button("Translate Audio"):
         audio = audio.set_frame_rate(16000)  # Ensure frame rate is 16000 Hz
 
         # Get the language code
-        selected_lang_code = list(languages.keys())[language_options.index(selected_lang)]
+        selected_lang_code_src = list(languages.keys())[language_options.index(selected_lang_src)]
+        selected_lang_code_tar = list(languages.keys())[language_options.index(selected_lang_tar)]
 
         # Split the audio into chunks (10 sec per chunk)
         chunk_duration_ms = 10000  
@@ -69,7 +71,7 @@ if st.button("Translate Audio"):
             chunk_transcription_text = transcription.text
             full_transcription += chunk_transcription_text + " "
             # Translate the chunk transcription
-            translation = translator.translate(chunk_transcription_text, dest=selected_lang_code)
+            translation = translator.translate(chunk_transcription_text, dest=selected_lang_code_tar)
             # Append the chunk translation to full translation
             full_translation += translation.text + " "
 
@@ -82,7 +84,7 @@ if st.button("Translate Audio"):
         st.write("Final Transcription:")
         st.write(full_transcription)
 
-        st.write(f"Final Translated Result ({selected_lang}):")
+        st.write(f"Final Translated Result ({selected_lang_tar}):")
         st.write(full_translation)
 
     else:
