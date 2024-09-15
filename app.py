@@ -5,14 +5,13 @@ import streamlit as st
 import googletrans 
 from pydub import AudioSegment
 import tempfile
-from google.cloud import translate_v2 as translate
 
 
 # Initialize the Groq client
 client = Groq(api_key="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")
 
 # Initialize Google Translate API
-translator = translate.Client()
+translator = googletrans.Translator()
 
 # Streamlit frontend for audio input and translation
 st.title("Audio Translation App")
@@ -72,7 +71,7 @@ if st.button("Translate Audio"):
             chunk_transcription_text = transcription.text
             full_transcription += chunk_transcription_text + " "
             # Translate the chunk transcription
-            translation = translator.translate(chunk_transcription_text,target_language=selected_lang_code_tar)
+            translation = translator.translate(chunk_transcription_text, dest=selected_lang_code_tar)
             # Append the chunk translation to full translation
             full_translation += translation.text + " "
 
