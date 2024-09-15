@@ -3,7 +3,7 @@ import os
 from groq import Groq
 
 # Initialize the Groq client
-client = Groq()
+client = Groq(api_key="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")
 
 # Streamlit frontend for audio input and translation
 st.title("Audio Translation App")
