@@ -1,5 +1,5 @@
 streamlit
 pydub
 googletrans==4.0.0-rc1
-groq==groq==0.5.0
+groq==groq==0.6.0
 python-dotenv
