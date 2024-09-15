@@ -19,8 +19,12 @@ st.title("Audio Translation App")
 # Audio file input
 audio_file = st.file_uploader("Upload an audio file", type=["m4a", "mp3", "wav"])
 
-# Text input for target language (e.g., 'hi' for Hindi, 'fr' for French)
-target_language = st.text_input("Enter target language code (e.g., 'hi' for Hindi)", value="en")
+languages = googletrans.LANGUAGES
+language_options = list(languages.values())
+selected_lang = st.selectbox("Select the target language for translation", language_options)
+
+# # Text input for target language (e.g., 'hi' for Hindi, 'fr' for French)
+# target_language = st.text_input("Enter target language code (e.g., 'hi' for Hindi)", value="en")
 
 # Button to trigger translation
 if st.button("Translate Audio"):
@@ -32,6 +36,9 @@ if st.button("Translate Audio"):
 
         # Load the audio using pydub
         audio = AudioSegment.from_file(filename)
+
+        # Get the language code
+        selected_lang_code = list(languages.keys())[language_options.index(selected_lang)]
 
         # Define chunk length (10 seconds = 10000 ms)
         chunk_length_ms = 10000  # 10 seconds per chunk
@@ -64,7 +71,7 @@ if st.button("Translate Audio"):
                 full_transcription += chunk_transcription_text + " "
 
                 # Translate the chunk transcription
-                translation = translator.translate(chunk_transcription_text, dest=target_language)
+                translation = translator.translate(chunk_transcription_text, dest=selected_lang_code)
 
                 # Append the chunk translation to full translation
                 full_translation += translation.text + " "
@@ -78,7 +85,7 @@ if st.button("Translate Audio"):
         st.write("Final Transcription:")
         st.write(full_transcription)
 
-        st.write(f"Final Translated Result ({target_language}):")
+        st.write(f"Final Translated Result ({selected_lang}):")
         st.write(full_translation)
 
     else:
