@@ -1,6 +1,8 @@
 import streamlit as st
 import os
 from groq import Groq
+from googletrans import Translator  # Translator for language translation
+
 
 # Initialize the Groq client
 client = Groq(api_key="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")
