@@ -5,7 +5,8 @@ import streamlit as st
 # import googletrans 
 from pydub import AudioSegment
 import tempfile
-from libretranslatepy import LibreTranslate
+from libretranslatepy import LibreTranslateAPI
+
 
 
 # Initialize the Groq client
