@@ -23,10 +23,10 @@ st.title("Audio Translation App")
 uploaded_file = st.file_uploader("Upload an audio file", type=["mp3", "wav", "ogg", "flac", "m4a"])
 
 
-# languages = googletrans.LANGUAGES
-# language_options = list(languages.values())
-selected_lang_src = st.selectbox("Select the source language for audio", ['hi', 'fr', 'en', 'de', 'ja','gu','ar'])
-selected_lang_tar = st.selectbox("Select the target language for translation", ['hi', 'fr', 'en', 'de', 'ja','gu','ar'])
+# # languages = googletrans.LANGUAGES
+# # language_options = list(languages.values())
+# selected_lang_src = st.selectbox("Select the source language for audio", ['hi', 'fr', 'en', 'de', 'ja','gu','ar'])
+# selected_lang_tar = st.selectbox("Select the target language for translation", ['hi', 'fr', 'en', 'de', 'ja','gu','ar'])
 
 # # Text input for target language (e.g., 'hi' for Hindi, 'fr' for French)
 # target_language = st.text_input("Enter target language code (e.g., 'hi' for Hindi)", value="en")
@@ -74,8 +74,8 @@ if st.button("Translate Audio"):
             chunk_transcription_text = transcription.text
             full_transcription += chunk_transcription_text + " "
 
-            chunk_translation = lt.translate(transcription.text, source=selected_lang_src, target=selected_lang_tar)
-            full_translation += chunk_translation + " "
+            # chunk_translation = lt.translate(transcription.text, source=selected_lang_src, target=selected_lang_tar)
+            # full_translation += chunk_translation + " "
 
 
             # # Translate the chunk transcription
@@ -86,14 +86,14 @@ if st.button("Translate Audio"):
             # Show progress on the frontend
             st.write(f"Processed chunk {i+1}/{len(chunks)}")
             st.write(f"Chunk Transcription: {chunk_transcription_text}")
-            st.write(f"Chunk Translation: {chunk_translation}")
+            # st.write(f"Chunk Translation: {chunk_translation}")
 
         # Show the final combined transcription and translation
         st.write("Final Transcription:")
         st.write(full_transcription)
 
-        st.write(f"Final Translated Result ({selected_lang_tar}):")
-        st.write(full_translation)
+        # st.write(f"Final Translated Result ({selected_lang_tar}):")
+        # st.write(full_translation)
 
     else:
         st.error("Please upload an audio file.")
