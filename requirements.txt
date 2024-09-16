@@ -1,4 +1,5 @@
 streamlit
 pydub
 groq
+google-cloud-translate
 python-dotenv
