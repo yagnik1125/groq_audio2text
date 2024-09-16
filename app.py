@@ -62,9 +62,10 @@ if st.button("Translate Audio"):
 
             # Transcribe the chunk using Groq API
             with open(chunk_filename, "rb") as file:
-                transcription = client.audio.translations.create(
+                transcription = client.audio.transcriptions.create(
                     file=(chunk_filename, file.read()),  # Required audio file
                     model="whisper-large-v3",  # Required model for transcription
+                    prompt="transcribe audio in original language",
                     response_format="json",  # Optional
                     temperature=0.0  # Optional
                 )
