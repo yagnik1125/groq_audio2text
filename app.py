@@ -11,6 +11,7 @@ from libretranslatepy import LibreTranslateAPI
 
 # Initialize the Groq client
 client = Groq(api_key="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")
+lt = LibreTranslateAPI("https://libretranslate.com/")
 
 # # Initialize Google Translate API
 # translator = googletrans.Translator()
