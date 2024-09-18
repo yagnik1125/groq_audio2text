@@ -19,7 +19,7 @@ st.title("Audio Translation App")
 
 # Audio file input
 uploaded_file = st.file_uploader("Upload an audio file", type=["mp3", "wav", "ogg", "flac", "m4a"])
-
+st.audio(uploaded_file, format="wav") 
 
 # # languages = googletrans.LANGUAGES
 # # language_options = list(languages.values())
