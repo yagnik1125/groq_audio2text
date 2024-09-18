@@ -23,14 +23,21 @@ st.title("Audio Translation App")
 uploaded_file = st.file_uploader("Upload an audio file", type=["mp3", "wav", "ogg", "flac", "m4a"])
 st.audio(uploaded_file, format="wav")
 mic_audio = mic_recorder(start_prompt="🎙️ Start Recording", stop_prompt="🎙️ Stop Recording", key='recorder')
-st.audio(mic_audio['bytes'], format='wav')
 mic_audio_file_name='temp_mic_audio.wav'
-
 if mic_audio:
     # Get the byte data from the audio recorder
     audio_bytes = mic_audio['bytes']
     audio_file_like = io.BytesIO(audio_bytes)
-
+    with wave.open(mic_audio_file_name, 'wb') as wav_file:
+        sample_width = 2  # Sample width in bytes (16 bits)
+        channels = 1      # Mono
+        framerate = 44100 # Sample rate
+        
+        wav_file.setnchannels(channels)
+        wav_file.setsampwidth(sample_width)
+        wav_file.setframerate(framerate)
+        wav_file.writeframes(audio_bytes)
+    st.audio(mic_audio_file_name, format='wav')
 
 
 
