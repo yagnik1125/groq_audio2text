@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 from groq import Groq
 import streamlit as st
 # import googletrans 
+from streamlit_mic_recorder import mic_recorder
 from pydub import AudioSegment
 import tempfile
 
@@ -19,7 +20,9 @@ st.title("Audio Translation App")
 
 # Audio file input
 uploaded_file = st.file_uploader("Upload an audio file", type=["mp3", "wav", "ogg", "flac", "m4a"])
-st.audio(uploaded_file, format="wav") 
+st.audio(uploaded_file, format="wav")
+mic_audio = mic_recorder(start_prompt="🎙️ Start Recording", stop_prompt="🎙️ Stop Recording", key='recorder')
+st.audio(mic_audio, format="wav")
 
 # # languages = googletrans.LANGUAGES
 # # language_options = list(languages.values())
@@ -83,7 +86,7 @@ if st.button("Transcribe Audio"):
                 transcription = client.audio.transcriptions.create(
                     file=(chunk_filename, file.read()),  # Required audio file
                     model="whisper-large-v3",  # Required model for transcription
-                    prompt="transcribe",
+                    prompt="Transcribe",
                     response_format="json",  # Optional
                     temperature=0.0  # Optional
                 )
