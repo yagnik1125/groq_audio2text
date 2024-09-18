@@ -32,12 +32,12 @@ if mic_audio:
         sample_width = 2  # Sample width in bytes (16 bits)
         channels = 1      # Mono
         framerate = 44100 # Sample rate
-        
+
         wav_file.setnchannels(channels)
         wav_file.setsampwidth(sample_width)
         wav_file.setframerate(framerate)
         wav_file.writeframes(audio_bytes)
-    st.audio(mic_audio_file_name, format='wav')
+    st.audio(audio_file_like, format='wav')
 
 
 
