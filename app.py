@@ -24,6 +24,7 @@ uploaded_file = st.file_uploader("Upload an audio file", type=["mp3", "wav", "og
 st.audio(uploaded_file, format="wav")
 mic_audio = mic_recorder(start_prompt="🎙️ Start Recording", stop_prompt="🎙️ Stop Recording", key='recorder')
 if mic_audio:
+    st.write("mic audio through bytes")
     st.audio(mic_audio['bytes'], format='wav')
 mic_audio_file_name='temp_mic_audio.wav'
 if mic_audio:
@@ -39,6 +40,7 @@ if mic_audio:
         wav_file.setsampwidth(sample_width)
         wav_file.setframerate(framerate)
         wav_file.writeframes(audio_bytes)
+    st.write("mic audio through wav")
     st.audio(audio_file_like, format='wav')
 
 
