@@ -30,7 +30,7 @@ uploaded_file = st.file_uploader("Upload an audio file", type=["mp3", "wav", "og
 # target_language = st.text_input("Enter target language code (e.g., 'hi' for Hindi)", value="en")
 
 # Button to trigger translation
-if st.button("Translate Audio"):
+if st.button("Transcribe Audio"):
     if uploaded_file is not None:
         # Save the uploaded file to a temporary directory
         with open("temp_audio_file", "wb") as f:
