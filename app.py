@@ -6,7 +6,8 @@ import streamlit as st
 from streamlit_mic_recorder import mic_recorder
 from pydub import AudioSegment
 import tempfile
-
+import wave
+import io
 
 
 # Initialize the Groq client
@@ -22,8 +23,16 @@ st.title("Audio Translation App")
 uploaded_file = st.file_uploader("Upload an audio file", type=["mp3", "wav", "ogg", "flac", "m4a"])
 st.audio(uploaded_file, format="wav")
 mic_audio = mic_recorder(start_prompt="🎙️ Start Recording", stop_prompt="🎙️ Stop Recording", key='recorder')
-print(mic_audio)
 st.audio(mic_audio['bytes'], format='wav')
+mic_audio_file_name='temp_mic_audio.wav'
+
+if mic_audio:
+    # Get the byte data from the audio recorder
+    audio_bytes = mic_audio['bytes']
+    audio_file_like = io.BytesIO(audio_bytes)
+
+
+
 
 # # languages = googletrans.LANGUAGES
 # # language_options = list(languages.values())
@@ -120,9 +129,11 @@ if st.button("Transcribe Audio"):
         # st.write(full_translation)
 
     elif mic_audio is not None:
+        audio_file_like.seek(0)
+        buffer_data = audio_file_like.read()
         # Save the uploaded file to a temporary directory
         with open("temp_audio_file", "wb") as f:
-            f.write(mic_audio['bytes'].getbuffer())
+            f.write(buffer_data)
         audio_path = "temp_audio_file"
 
         # Load the audio using pydub
