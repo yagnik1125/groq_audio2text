@@ -22,7 +22,7 @@ st.title("Audio Translation App")
 uploaded_file = st.file_uploader("Upload an audio file", type=["mp3", "wav", "ogg", "flac", "m4a"])
 st.audio(uploaded_file, format="wav")
 mic_audio = mic_recorder(start_prompt="🎙️ Start Recording", stop_prompt="🎙️ Stop Recording", key='recorder')
-st.audio(mic_audio['bytes'], format='audio/wav')
+st.audio(mic_audio['bytes'], format='wav')
 
 # # languages = googletrans.LANGUAGES
 # # language_options = list(languages.values())
