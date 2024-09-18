@@ -121,7 +121,7 @@ if st.button("Transcribe Audio"):
     elif mic_audio is not None:
         # Save the uploaded file to a temporary directory
         with open("temp_audio_file", "wb") as f:
-            f.write(mic_audio.getbuffer())
+            f.write(mic_audio['bytes'].getbuffer())
         audio_path = "temp_audio_file"
 
         # Load the audio using pydub
