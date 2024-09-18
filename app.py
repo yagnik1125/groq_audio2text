@@ -40,8 +40,8 @@ if mic_audio:
         wav_file.setsampwidth(sample_width)
         wav_file.setframerate(framerate)
         wav_file.writeframes(audio_bytes)
-    st.write("mic audio through wav")
-    st.audio(audio_file_like, format='wav')
+    # st.write("mic audio through wav")
+    # st.audio(audio_file_like, format='wav')
 
 
 
