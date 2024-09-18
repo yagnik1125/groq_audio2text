@@ -102,6 +102,7 @@ if st.button("Transcribe Audio"):
 
             # Show progress on the frontend
             st.write(f"Processed chunk {i+1}/{len(chunks)}")
+            st.audio(chunk_filename, format="wav") 
             st.write(f"Chunk Transcription: {chunk_transcription_text}")
             # st.write(f"Chunk Translation: {chunk_translation}")
 
