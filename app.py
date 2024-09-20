@@ -13,8 +13,6 @@ import io
 # Initialize the Groq client
 client = Groq(api_key="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")
 
-# # Initialize Google Translate API
-# translator = googletrans.Translator()
 
 # Streamlit frontend for audio input and translation
 st.title("Audio Translation App")
@@ -60,13 +58,8 @@ def translate_text(text, targ_lang):
         print(f"An error occurred: {str(e)}")
         return None
 
-# # languages = googletrans.LANGUAGES
-# # language_options = list(languages.values())
-# selected_lang_src = st.selectbox("Select the source language for audio", ['hi', 'fr', 'en', 'de', 'ja','gu','ar'])
-selected_lang_tar = st.selectbox("Select the target language for translation", ['afrikaans', 'albanian', 'amharic', 'arabic', 'armenian', 'azerbaijani', 'basque', 'belarusian', 'bengali', 'bosnian', 'bulgarian', 'catalan', 'cebuano', 'chichewa', 'chinese (simplified)', 'chinese (traditional)', 'corsican', 'croatian', 'czech', 'danish', 'dutch', 'english', 'esperanto', 'estonian', 'filipino', 'finnish', 'french', 'frisian', 'galician', 'georgian', 'german', 'greek', 'gujarati', 'haitian creole', 'hausa', 'hawaiian', 'hebrew', 'hebrew', 'hindi', 'hmong', 'hungarian', 'icelandic', 'igbo', 'indonesian', 'irish', 'italian', 'japanese', 'javanese', 'kannada', 'kazakh', 'khmer', 'korean', 'kurdish (kurmanji)', 'kyrgyz', 'lao', 'latin', 'latvian', 'lithuanian', 'luxembourgish', 'macedonian', 'malagasy', 'malay', 'malayalam', 'maltese', 'maori', 'marathi', 'mongolian', 'myanmar (burmese)', 'nepali', 'norwegian', 'odia', 'pashto', 'persian', 'polish', 'portuguese', 'punjabi', 'romanian', 'russian', 'samoan', 'scots gaelic', 'serbian', 'sesotho', 'shona', 'sindhi', 'sinhala', 'slovak', 'slovenian', 'somali', 'spanish', 'sundanese', 'swahili', 'swedish', 'tajik', 'tamil', 'telugu', 'thai', 'turkish', 'ukrainian', 'urdu', 'uyghur', 'uzbek', 'vietnamese', 'welsh', 'xhosa', 'yiddish', 'yoruba', 'zulu'])
 
-# # Text input for target language (e.g., 'hi' for Hindi, 'fr' for French)
-# target_language = st.text_input("Enter target language code (e.g., 'hi' for Hindi)", value="en")
+selected_lang_tar = st.selectbox("Select the target language for translation", ['afrikaans', 'albanian', 'amharic', 'arabic', 'armenian', 'azerbaijani', 'basque', 'belarusian', 'bengali', 'bosnian', 'bulgarian', 'catalan', 'cebuano', 'chichewa', 'chinese (simplified)', 'chinese (traditional)', 'corsican', 'croatian', 'czech', 'danish', 'dutch', 'english', 'esperanto', 'estonian', 'filipino', 'finnish', 'french', 'frisian', 'galician', 'georgian', 'german', 'greek', 'gujarati', 'haitian creole', 'hausa', 'hawaiian', 'hebrew', 'hebrew', 'hindi', 'hmong', 'hungarian', 'icelandic', 'igbo', 'indonesian', 'irish', 'italian', 'japanese', 'javanese', 'kannada', 'kazakh', 'khmer', 'korean', 'kurdish (kurmanji)', 'kyrgyz', 'lao', 'latin', 'latvian', 'lithuanian', 'luxembourgish', 'macedonian', 'malagasy', 'malay', 'malayalam', 'maltese', 'maori', 'marathi', 'mongolian', 'myanmar (burmese)', 'nepali', 'norwegian', 'odia', 'pashto', 'persian', 'polish', 'portuguese', 'punjabi', 'romanian', 'russian', 'samoan', 'scots gaelic', 'serbian', 'sesotho', 'shona', 'sindhi', 'sinhala', 'slovak', 'slovenian', 'somali', 'spanish', 'sundanese', 'swahili', 'swedish', 'tajik', 'tamil', 'telugu', 'thai', 'turkish', 'ukrainian', 'urdu', 'uyghur', 'uzbek', 'vietnamese', 'welsh', 'xhosa', 'yiddish', 'yoruba', 'zulu'])
 
 # Button to trigger translation
 if st.button("Transcribe and Translate Audio"):
@@ -80,10 +73,6 @@ if st.button("Transcribe and Translate Audio"):
         audio = AudioSegment.from_file(audio_path)
         audio = audio.set_channels(1)  # Ensure mono channel
         audio = audio.set_frame_rate(16000)  # Ensure frame rate is 16000 Hz
-
-        # # Get the language code
-        # selected_lang_code_src = list(languages.keys())[language_options.index(selected_lang_src)]
-        # selected_lang_code_tar = list(languages.keys())[language_options.index(selected_lang_tar)]
 
         # Split the audio into chunks (10 sec per chunk)
         chunk_duration_ms = 10000  
@@ -133,12 +122,6 @@ if st.button("Transcribe and Translate Audio"):
             # chunk_translation = lt.translate(transcription.text, source=selected_lang_src, target=selected_lang_tar)
             chunk_translation = translate_text(chunk_transcription_text, selected_lang_tar)
             full_translation += chunk_translation + " "
-
-
-            # # Translate the chunk transcription
-            # translation = translator.translate(chunk_transcription_text, dest=selected_lang_code_tar)
-            # # Append the chunk translation to full translation
-            # full_translation += translation.text + " "
 
             # Show progress on the frontend
             st.write(f"Processed chunk {i+1}/{len(chunks)}")
@@ -168,10 +151,6 @@ if st.button("Transcribe and Translate Audio"):
         audio = audio.set_channels(1)  # Ensure mono channel
         audio = audio.set_frame_rate(16000)  # Ensure frame rate is 16000 Hz
 
-        # # Get the language code
-        # selected_lang_code_src = list(languages.keys())[language_options.index(selected_lang_src)]
-        # selected_lang_code_tar = list(languages.keys())[language_options.index(selected_lang_tar)]
-
         # Split the audio into chunks (10 sec per chunk)
         chunk_duration_ms = 10000  
         chunks = [audio[i:i + chunk_duration_ms] for i in range(0, len(audio), chunk_duration_ms)]
@@ -220,12 +199,6 @@ if st.button("Transcribe and Translate Audio"):
             # chunk_translation = lt.translate(transcription.text, source=selected_lang_src, target=selected_lang_tar)
             chunk_translation = translate_text(chunk_transcription_text, selected_lang_tar)
             full_translation += chunk_translation + " "
-
-
-            # # Translate the chunk transcription
-            # translation = translator.translate(chunk_transcription_text, dest=selected_lang_code_tar)
-            # # Append the chunk translation to full translation
-            # full_translation += translation.text + " "
 
             # Show progress on the frontend
             st.write(f"Processed chunk {i+1}/{len(chunks)}")
