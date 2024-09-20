@@ -63,7 +63,7 @@ def translate_text(text, targ_lang):
 # # languages = googletrans.LANGUAGES
 # # language_options = list(languages.values())
 # selected_lang_src = st.selectbox("Select the source language for audio", ['hi', 'fr', 'en', 'de', 'ja','gu','ar'])
-# selected_lang_tar = st.selectbox("Select the target language for translation", ['hi', 'fr', 'en', 'de', 'ja','gu','ar'])
+selected_lang_tar = st.selectbox("Select the target language for translation", ['afrikaans', 'albanian', 'amharic', 'arabic', 'armenian', 'azerbaijani', 'basque', 'belarusian', 'bengali', 'bosnian', 'bulgarian', 'catalan', 'cebuano', 'chichewa', 'chinese (simplified)', 'chinese (traditional)', 'corsican', 'croatian', 'czech', 'danish', 'dutch', 'english', 'esperanto', 'estonian', 'filipino', 'finnish', 'french', 'frisian', 'galician', 'georgian', 'german', 'greek', 'gujarati', 'haitian creole', 'hausa', 'hawaiian', 'hebrew', 'hebrew', 'hindi', 'hmong', 'hungarian', 'icelandic', 'igbo', 'indonesian', 'irish', 'italian', 'japanese', 'javanese', 'kannada', 'kazakh', 'khmer', 'korean', 'kurdish (kurmanji)', 'kyrgyz', 'lao', 'latin', 'latvian', 'lithuanian', 'luxembourgish', 'macedonian', 'malagasy', 'malay', 'malayalam', 'maltese', 'maori', 'marathi', 'mongolian', 'myanmar (burmese)', 'nepali', 'norwegian', 'odia', 'pashto', 'persian', 'polish', 'portuguese', 'punjabi', 'romanian', 'russian', 'samoan', 'scots gaelic', 'serbian', 'sesotho', 'shona', 'sindhi', 'sinhala', 'slovak', 'slovenian', 'somali', 'spanish', 'sundanese', 'swahili', 'swedish', 'tajik', 'tamil', 'telugu', 'thai', 'turkish', 'ukrainian', 'urdu', 'uyghur', 'uzbek', 'vietnamese', 'welsh', 'xhosa', 'yiddish', 'yoruba', 'zulu'])
 
 # # Text input for target language (e.g., 'hi' for Hindi, 'fr' for French)
 # target_language = st.text_input("Enter target language code (e.g., 'hi' for Hindi)", value="en")
@@ -131,7 +131,7 @@ if st.button("Transcribe Audio"):
             full_transcription += chunk_transcription_text + " "
 
             # chunk_translation = lt.translate(transcription.text, source=selected_lang_src, target=selected_lang_tar)
-            chunk_translation = translate_text(chunk_transcription_text, "gujarati")
+            chunk_translation = translate_text(chunk_transcription_text, selected_lang_tar)
             full_translation += chunk_translation + " "
 
 
@@ -218,7 +218,7 @@ if st.button("Transcribe Audio"):
             full_transcription += chunk_transcription_text + " "
 
             # chunk_translation = lt.translate(transcription.text, source=selected_lang_src, target=selected_lang_tar)
-            chunk_translation = translate_text(chunk_transcription_text, "gujarati")
+            chunk_translation = translate_text(chunk_transcription_text, selected_lang_tar)
             full_translation += chunk_translation + " "
 
 
