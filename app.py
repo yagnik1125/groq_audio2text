@@ -43,7 +43,22 @@ if mic_audio:
     # st.write("mic audio through wav")
     # st.audio(audio_file_like, format='wav')
 
-
+def translate_text(text, targ_lang):
+    try:
+        chat_completion = client.chat.completions.create(
+            messages=[
+                {
+                    "role": "system",
+                    "content": f"Translate this text to '{targ_lang}'. Text:{text}. ONLY RETURN TRANSLATED TEXT DO NOT WRITE ANYTHING ELSE",
+                }
+            ],
+            model="llama3-8b-8192",
+        )
+        return chat_completion.choices[0].message.content 
+        # print(chat_completion.choices[0].message.content)
+    except Exception as e:
+        print(f"An error occurred: {str(e)}")
+        return None
 
 # # languages = googletrans.LANGUAGES
 # # language_options = list(languages.values())
@@ -116,7 +131,8 @@ if st.button("Transcribe Audio"):
             full_transcription += chunk_transcription_text + " "
 
             # chunk_translation = lt.translate(transcription.text, source=selected_lang_src, target=selected_lang_tar)
-            # full_translation += chunk_translation + " "
+            chunk_translation = translate_text(chunk_transcription_text, "gujarati")
+            full_translation += chunk_translation + " "
 
 
             # # Translate the chunk transcription
@@ -128,7 +144,7 @@ if st.button("Transcribe Audio"):
             st.write(f"Processed chunk {i+1}/{len(chunks)}")
             st.audio(chunk_filename, format="wav") 
             st.write(f"Chunk Transcription: {chunk_transcription_text}")
-            # st.write(f"Chunk Translation: {chunk_translation}")
+            st.write(f"Chunk Translation: {chunk_translation}")
 
         #----------------------------------chunk wise end----------------------------------------------------------
 
@@ -136,8 +152,8 @@ if st.button("Transcribe Audio"):
         st.write("Final Transcription:")
         st.write(full_transcription)
 
-        # st.write(f"Final Translated Result ({selected_lang_tar}):")
-        # st.write(full_translation)
+        st.write(f"Final Translatation:")
+        st.write(full_translation)
 
     elif mic_audio is not None:
         audio_file_like.seek(0)
@@ -202,7 +218,8 @@ if st.button("Transcribe Audio"):
             full_transcription += chunk_transcription_text + " "
 
             # chunk_translation = lt.translate(transcription.text, source=selected_lang_src, target=selected_lang_tar)
-            # full_translation += chunk_translation + " "
+            chunk_translation = translate_text(chunk_transcription_text, "gujarati")
+            full_translation += chunk_translation + " "
 
 
             # # Translate the chunk transcription
@@ -214,7 +231,7 @@ if st.button("Transcribe Audio"):
             st.write(f"Processed chunk {i+1}/{len(chunks)}")
             st.audio(chunk_filename, format="wav") 
             st.write(f"Chunk Transcription: {chunk_transcription_text}")
-            # st.write(f"Chunk Translation: {chunk_translation}")
+            st.write(f"Chunk Translation: {chunk_translation}")
 
         #----------------------------------chunk wise end----------------------------------------------------------
 
@@ -222,8 +239,8 @@ if st.button("Transcribe Audio"):
         st.write("Final Transcription:")
         st.write(full_transcription)
 
-        # st.write(f"Final Translated Result ({selected_lang_tar}):")
-        # st.write(full_translation)
+        st.write(f"Final Translation:")
+        st.write(full_translation)
 
     else:
         st.error("Please upload an audio file.")
