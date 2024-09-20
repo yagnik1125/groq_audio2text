@@ -52,7 +52,7 @@ def translate_text(text, targ_lang):
                     "content": f"Translate this text to '{targ_lang}'. Text:{text}. ONLY RETURN TRANSLATED TEXT DO NOT WRITE ANYTHING ELSE",
                 }
             ],
-            model="llama3-8b-8192",
+            model="llama3-70b-8192",
         )
         return chat_completion.choices[0].message.content 
         # print(chat_completion.choices[0].message.content)
